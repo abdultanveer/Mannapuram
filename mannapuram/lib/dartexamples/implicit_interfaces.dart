@@ -15,9 +15,11 @@ class Impostor implements Person {
   String get _name => '';
 
   String greet(String who) => 'Hi $who. Do you know who I am?';
+
 }
 
 String greetBob(Person person) => person.greet('Bob');
+
 
 void main() {
   print(greetBob(Person('Kathy')));
