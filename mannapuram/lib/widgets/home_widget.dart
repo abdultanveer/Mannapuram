@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(
-      home: HomeWidget()));
-}
-
 class HomeWidget extends StatefulWidget {
   const HomeWidget({super.key});
 
@@ -12,40 +7,39 @@ class HomeWidget extends StatefulWidget {
   State<HomeWidget> createState() => _HomeWidgetState();
 }
 
-
 class _HomeWidgetState extends State<HomeWidget> {
-  int counter = 0;
+  int _counter = 0;
 
-  void _increment() {
+  void _incrementCounter(){
     setState(() {
-      counter++;
+      _counter++;
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       appBar: AppBar(
-        title: Text("header app bar"),
+        centerTitle: true,
+        title: Text("header app bar title"),
       ),
       body: Center(
           child: Text(
-            "you have clicked \n $counter no of times",
+            "you clicked \n $_counter \n no of  times",
             style: TextStyle(
-                fontWeight: FontWeight.bold,
                 fontSize: 20.0,
+                fontWeight: FontWeight.bold,
                 color: Colors.deepOrange
             ),
           )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _increment,
-        child: const Icon(Icons.add),
+        onPressed: _incrementCounter,
+        child: Icon(Icons.add),
       ),
     );
   }
-}
 
 
+  }
 
