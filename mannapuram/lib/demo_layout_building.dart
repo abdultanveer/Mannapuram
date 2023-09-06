@@ -14,8 +14,27 @@ class LayoutApp extends StatelessWidget {
         appBar: AppBar(
             title: Text("demo layouts"),
         ),
-        body: Text("helloworld"),
+        body: Column(
+          children: [
+              _titleSection(),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _titleSection(){
+    return Row(
+      children: [
+        Column(
+          children: [
+            Text("some title"),
+            Text("some description")
+          ],
+        ),
+        Icon(Icons.star, color: Colors.red,),
+        Text("41")
+      ],
     );
   }
 }
