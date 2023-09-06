@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mannapuram/widgets/fav_widget.dart';
 
 void main() {
   runApp(MyApp());
@@ -62,11 +63,8 @@ class MyApp extends StatelessWidget {
               ],
             ),
           ),
-          Icon(
-            Icons.star,
-            color: Colors.red,
-          ),
-          Text("41")
+         FavoriteWidget(),
+
         ],
       ),
     );
