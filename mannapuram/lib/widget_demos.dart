@@ -9,12 +9,19 @@ class MyWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
 
         BlueBox(),
-        BlueBox(),
-        BlueBox()
+        Flexible(
+          fit: FlexFit.tight,
+            flex: 1,
+            child: BlueBox()
+        ),
+        Flexible(
+          fit: FlexFit.tight,
+          flex: 1,
+            child: BlueBox())
       ],
     );
   }
