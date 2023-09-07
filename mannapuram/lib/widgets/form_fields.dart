@@ -17,9 +17,17 @@ class MyCustomForm extends StatefulWidget {
 
 class _MyCustomFormState extends State<MyCustomForm> {
   final myController = TextEditingController();
+  late FocusNode myFocusNode;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    myFocusNode = FocusNode();
+  }
+  @override
   void dispose() {
+    myFocusNode.dispose();
     myController.dispose();
     super.dispose();
   }
@@ -39,6 +47,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
       body: Column(
         children: [
           TextField(
+            autofocus: true,
             onChanged: (text){
               print('First text field: $text (${text.characters.length})');
             },
@@ -49,6 +58,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
             ),
           ),
           TextFormField(
+            focusNode:myFocusNode ,
             decoration: InputDecoration(
               labelText: "enter username",
               border: UnderlineInputBorder(),
@@ -58,6 +68,7 @@ class _MyCustomFormState extends State<MyCustomForm> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
+          myFocusNode.requestFocus();
           showDialog(context: context, builder: (context){
             return AlertDialog(content: Text(myController.text),);
           });
