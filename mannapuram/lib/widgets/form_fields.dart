@@ -24,12 +24,13 @@ class _MyCustomFormState extends State<MyCustomForm> {
     super.dispose();
   }
 
-  void showMyDialog(BuildContext context){
-    AlertDialog alertDialog = AlertDialog();
+  void _showMyDialog(BuildContext context){
+    //AlertDialog dialog = AlertDialog(content: Text(myController.text),);
 
-    showDialog(context: context, builder: (context){
-      return AlertDialog(content: Text(myController.text),);
-    });
+  showDialog(context: context, builder: (context){
+    return AlertDialog(content: Text(myController.text),);
+  });
+
   }
 
   @override
@@ -38,6 +39,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
       body: Column(
         children: [
           TextField(
+            onChanged: (text){
+              print('First text field: $text (${text.characters.length})');
+            },
             controller: myController,
             decoration: InputDecoration(
                 hintText: "enter search word",
@@ -54,12 +58,9 @@ class _MyCustomFormState extends State<MyCustomForm> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          showDialog(context: context,
-              builder: (context){
-            return AlertDialog(
-              content: Text(myController.text),
-            );
-              });
+          showDialog(context: context, builder: (context){
+            return AlertDialog(content: Text(myController.text),);
+          });
         },
         child: Icon(Icons.text_fields),
       ),
