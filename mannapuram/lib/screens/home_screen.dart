@@ -6,13 +6,26 @@ import 'package:mannapuram/screens/extract_args_screen.dart';
 
 void main() => runApp(MaterialApp(
       routes: {
-        ExtractArgsScreen.routeName : (context)=> const ExtractArgsScreen()
+        ExtractArgsScreen.routeName: (context) => const ExtractArgsScreen()
       },
       home: HomeScreen(),
     ));
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  var controller = TextEditingController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +33,17 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("home screen"),
       ),
-      body: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(context,
-              ExtractArgsScreen.routeName,
-               arguments: ScreenArgsBox("some title", "some message"));
-        },
-        child: Text('navigate to extractargs screen'),
+      body: Column(
+        children: [
+          TextFormField(controller: controller,),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pushNamed(context, ExtractArgsScreen.routeName,
+                  arguments: ScreenArgsBox("some title", controller.text));
+            },
+            child: Text('navigate to extractargs screen'),
+          ),
+        ],
       ),
     );
   }
