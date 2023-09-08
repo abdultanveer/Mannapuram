@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:mannapuram/screens/navigation/second_route.dart';
 
-void main()=> runApp(MaterialApp(home: FirstRoute(),));
+void main()=> runApp(MaterialApp(
+  title: 'routes demo',
+  initialRoute: '/',
+  routes: {
+    '/':(context)=> const FirstRoute(),
+    '/second': (context)=> const SecondRoute()
+  },
+  ));
 
 
 class FirstRoute extends StatelessWidget {
@@ -14,9 +21,7 @@ class FirstRoute extends StatelessWidget {
       body: Center(
         child: ElevatedButton(
           onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context){
-              return SecondRoute();
-            }));
+            Navigator.pushNamed(context, '/second');
           },
           child: Text("open route"),
         ),
