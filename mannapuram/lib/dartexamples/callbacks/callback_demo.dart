@@ -5,30 +5,30 @@ class CallbackDemo{
 void main(){
   Neeraj neeraj = Neeraj();
   CallBackMobilePhone mobilePhone = Abdul();
-  neeraj.fetchData(mobilePhone);
+  neeraj.getCricketScore(mobilePhone);
 
 }
 
 class Neeraj{
-   void fetchData( CallBackMobilePhone mobilePhone){
+   void getCricketScore( CallBackMobilePhone mobilePhone){
      sleep(Duration(seconds:10));
 
      print("i have fetched the data");
-     mobilePhone.onSuccess();
+     mobilePhone.onSuccess(100);
    }
 }
 
 class Abdul implements CallBackMobilePhone{
-  void serveData(){
-    print("abdul is serving the data fetched by neeraj");
+  void announceCricketScore(int criScore){
+    print("abdul is serving the data fetched by neeraj ie cricket score is $criScore");
   }
 
   @override
-  void onSuccess() {
-    serveData();
+  void onSuccess(int cricketScore) {
+    announceCricketScore(cricketScore);
   }
 }
 
 class CallBackMobilePhone{
-    void onSuccess(){}
+    void onSuccess(int cricketScore){}
 }
