@@ -34,7 +34,10 @@ class _JsonAppState extends State<JsonApp> {
       child:FutureBuilder<Album>(
         future: futureAlbum,
         builder: (context,snapshot){
-          return Text(snapshot.data!.title);
+      if (snapshot.hasData) {
+        return Text(snapshot.data!.title);
+      }
+          return const CircularProgressIndicator();
         },
       ),
     );
