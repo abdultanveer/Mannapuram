@@ -5,10 +5,13 @@ import 'package:mannapuram/model/album.dart';
 
 void main()async{
   var response =  await fetchAlbum();
-  var album = Album.fromJson(jsonDecode(response.body));
-  print(album.title);
+ /* var album = Album.fromJson(jsonDecode(response.body));
+  print(album.title);*/
 }
 
-Future<http.Response> fetchAlbum() {
-  return http.get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+Future<Album> fetchAlbum() async {
+  final response = await http
+      .get(Uri.parse('https://jsonplaceholder.typicode.com/albums/1'));
+  return Album.fromJson(jsonDecode(response.body));
+
 }
