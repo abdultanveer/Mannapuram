@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:mannapuram/model/album.dart';
 
 void main()async{
   var response =  await fetchAlbum();
-  print(response.body);
+  var album = Album.fromJson(jsonDecode(response.body));
+  print(album.title);
 }
 
 Future<http.Response> fetchAlbum() {
