@@ -13,12 +13,24 @@ void main() async{
 }
 
 class DogsApp extends StatelessWidget {
-  const DogsApp({super.key});
+   DogsApp({super.key});
+var idController = TextEditingController();
+  var nameController = TextEditingController();
+  var ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('dogs db demo'),),
+      body: Column(
+        children: [
+          TextField(controller: idController ,decoration: InputDecoration(labelText: "enter id"),),
+          TextField(controller:nameController ,decoration: InputDecoration(labelText: "enter name"),),
+          TextField(controller: ageController ,decoration: InputDecoration(labelText: "enter age"),),
+        ],
+      ),
+      
+      
       floatingActionButton: FloatingActionButton(
         onPressed: addDog ,
         child: Icon(Icons.add),
@@ -27,7 +39,9 @@ class DogsApp extends StatelessWidget {
   }
 
   void addDog() async {
-    var dog = Dog(id: 1, name: "german shepherd", age: 3);
+    var dog = Dog(id: int.parse(idController.text), 
+        name: nameController.text, 
+        age: int.parse(ageController.text));
     await dogDao.insertDog(dog)    ;
   }
 }
