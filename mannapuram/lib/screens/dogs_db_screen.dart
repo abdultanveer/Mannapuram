@@ -27,6 +27,9 @@ var idController = TextEditingController();
           TextField(controller: idController ,decoration: InputDecoration(labelText: "enter id"),),
           TextField(controller:nameController ,decoration: InputDecoration(labelText: "enter name"),),
           TextField(controller: ageController ,decoration: InputDecoration(labelText: "enter age"),),
+          FutureBuilder(future: getAllDogs(), builder: (context, snapshot){
+            return Text(snapshot.data![0].name);
+          }),
         ],
       ),
       
@@ -43,5 +46,9 @@ var idController = TextEditingController();
         name: nameController.text, 
         age: int.parse(ageController.text));
     await dogDao.insertDog(dog)    ;
+  }
+
+  Future<List<Dog>> getAllDogs(){
+    return dogDao.getDogs();
   }
 }
