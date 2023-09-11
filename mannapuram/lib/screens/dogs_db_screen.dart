@@ -5,9 +5,12 @@ import '../database/crud.dart';
 
 var dogDao = new DogDao();
 var database;
-void main() => runApp(MaterialApp(
-  home: DogsApp(),
-));
+void main() async{
+  database = await dogDao.openDb();
+  runApp(MaterialApp(
+    home: DogsApp(),
+  ));
+}
 
 class DogsApp extends StatelessWidget {
   const DogsApp({super.key});
