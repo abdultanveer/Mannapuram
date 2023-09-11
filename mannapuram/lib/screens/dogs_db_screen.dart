@@ -23,13 +23,25 @@ var idController = TextEditingController();
     return Scaffold(
       appBar: AppBar(title: Text('dogs db demo'),),
       body: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           TextField(controller: idController ,decoration: InputDecoration(labelText: "enter id"),),
           TextField(controller:nameController ,decoration: InputDecoration(labelText: "enter name"),),
           TextField(controller: ageController ,decoration: InputDecoration(labelText: "enter age"),),
-          FutureBuilder(future: getAllDogs(), builder: (context, snapshot){
-            return Text(snapshot.data![0].name);
-          }),
+         FutureBuilder(future: getAllDogs(), builder: (context,snapshot){
+           return Flexible(
+             flex: 1,
+             child: Center(
+               child: ListView.builder(
+                   itemCount: snapshot.data!.length,
+                   itemBuilder: (context,index){
+                 return ListTile(
+                   title: Text(snapshot.data![index].name),
+                 );
+               }),
+             ),
+           );
+         }),
         ],
       ),
       
