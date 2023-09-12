@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mannapuram/model/dog.dart';
+import 'package:mannapuram/screens/add_dog_screen.dart';
 
 import '../database/crud.dart';
 
@@ -21,11 +22,7 @@ class DogsApp extends StatefulWidget {
 
 class _DogsAppState extends State<DogsApp> {
 
-var idController = TextEditingController();
 
-  var nameController = TextEditingController();
-
-  var ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,10 +31,10 @@ var idController = TextEditingController();
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          TextField(controller: idController ,decoration: InputDecoration(labelText: "enter id"),),
+          /*TextField(controller: idController ,decoration: InputDecoration(labelText: "enter id"),),
           TextField(controller:nameController ,decoration: InputDecoration(labelText: "enter name"),),
           TextField(controller: ageController ,decoration: InputDecoration(labelText: "enter age"),),
-         FutureBuilder(future: getAllDogs(), builder: (context,snapshot){
+        */ FutureBuilder(future: getAllDogs(), builder: (context,snapshot){
            return Flexible(
              flex: 1,
              child: Center(
@@ -69,17 +66,20 @@ var idController = TextEditingController();
 
 
       floatingActionButton: FloatingActionButton(
-        onPressed: addDog ,
+        onPressed: (){
+          Navigator.push(context,
+          MaterialPageRoute(builder: (context) =>  AddDog(dogDao)));
+        },
         child: Icon(Icons.add),
       ),
     );
   }
 
   void addDog() async {
-    var dog = Dog(id: int.parse(idController.text),
+    /*var dog = Dog(id: int.parse(idController.text),
         name: nameController.text,
         age: int.parse(ageController.text));
-    await dogDao.insertDog(dog)    ;
+    await dogDao.insertDog(dog)    ;*/
   }
 
   Future<List<Dog>> getAllDogs(){
