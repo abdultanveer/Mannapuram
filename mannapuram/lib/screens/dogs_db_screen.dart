@@ -12,10 +12,19 @@ void main() async{
   ));
 }
 
-class DogsApp extends StatelessWidget {
+class DogsApp extends StatefulWidget {
    DogsApp({super.key});
+
+  @override
+  State<DogsApp> createState() => _DogsAppState();
+}
+
+class _DogsAppState extends State<DogsApp> {
+
 var idController = TextEditingController();
+
   var nameController = TextEditingController();
+
   var ageController = TextEditingController();
 
   @override
@@ -33,10 +42,23 @@ var idController = TextEditingController();
              flex: 1,
              child: Center(
                child: ListView.builder(
+
                    itemCount: snapshot.data!.length,
                    itemBuilder: (context,index){
-                 return ListTile(
-                   title: Text(snapshot.data![index].name),
+                     final item = snapshot.data![index];
+                     return Dismissible(
+                       onDismissed: (direction){
+                          deleteDog(index);
+                          setState(() {
+
+                          });
+                       },
+                       background: Container(color: Colors.red),
+                       key: Key(item.name),
+                   child: ListTile(
+                     leading: Text(snapshot.data![index].age.toString()),
+                     title: Text(snapshot.data![index].name),
+                   ),
                  );
                }),
              ),
@@ -44,8 +66,8 @@ var idController = TextEditingController();
          }),
         ],
       ),
-      
-      
+
+
       floatingActionButton: FloatingActionButton(
         onPressed: addDog ,
         child: Icon(Icons.add),
@@ -54,13 +76,17 @@ var idController = TextEditingController();
   }
 
   void addDog() async {
-    var dog = Dog(id: int.parse(idController.text), 
-        name: nameController.text, 
+    var dog = Dog(id: int.parse(idController.text),
+        name: nameController.text,
         age: int.parse(ageController.text));
     await dogDao.insertDog(dog)    ;
   }
 
   Future<List<Dog>> getAllDogs(){
     return dogDao.getDogs();
+  }
+
+  deleteDog(int id){
+    dogDao.deleteDog(id);
   }
 }
