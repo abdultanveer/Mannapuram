@@ -9,6 +9,9 @@ var database;
 void main() async{
   database = await dogDao.openDb();
   runApp(MaterialApp(
+  routes: {
+    'add_dog': (context)=> AddDog(dogDao),
+  },
     home: DogsApp(),
   ));
 }
@@ -43,20 +46,27 @@ class _DogsAppState extends State<DogsApp> {
                    itemCount: snapshot.data!.length,
                    itemBuilder: (context,index){
                      final item = snapshot.data![index];
-                     return Dismissible(
-                       onDismissed: (direction){
-                          deleteDog(index);
-                          setState(() {
-
-                          });
+                     return GestureDetector(
+                       onTap: (){
+                         print(snapshot.data![index].name);
+                         var dog = snapshot.data![index];
+                         Navigator.pushNamed(context, 'add_dog',arguments: dog);
                        },
-                       background: Container(color: Colors.red),
-                       key: Key(item.name),
+                       child: Dismissible(
+                         onDismissed: (direction){
+                            deleteDog(index);
+                            setState(() {
+
+                            });
+                         },
+                         background: Container(color: Colors.red),
+                         key: Key(item.name),
                    child: ListTile(
-                     leading: Text(snapshot.data![index].age.toString()),
-                     title: Text(snapshot.data![index].name),
+                       leading: Text(snapshot.data![index].age.toString()),
+                       title: Text(snapshot.data![index].name),
                    ),
-                 );
+                 ),
+                     );
                }),
              ),
            );
