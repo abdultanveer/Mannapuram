@@ -7,6 +7,7 @@ import '../model/dog.dart';
 
 class AddDog extends StatelessWidget {
    AddDog(DogDao dogDao, {super.key});
+   bool isUpgrade = false;
   var idController = TextEditingController();
 
   var nameController = TextEditingController();
@@ -14,12 +15,14 @@ class AddDog extends StatelessWidget {
   var ageController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    if(ModalRoute.of(context)!.settings.arguments != null) {
+      isUpgrade = true;
+      Dog dog = ModalRoute.of(context)!.settings.arguments as Dog;
+      idController.text = dog!.id.toString();
+      nameController.text = dog!.name;
+      ageController.text = dog.age.toString();
+    }
 
-    final dog = ModalRoute.of(context)!.settings.arguments as Dog;
-
-    idController.text = dog.id.toString();
-    nameController.text = dog.name;
-    ageController.text = dog.age.toString();
 
     return Scaffold(
       body: Column(
@@ -30,7 +33,7 @@ class AddDog extends StatelessWidget {
           ElevatedButton(onPressed: (){
             addDog();
             Navigator.pop(context);
-          }, child: Text('save'))
+          }, child: Text((isUpgrade)? 'update':'save'))
         ],
       ),
     );
