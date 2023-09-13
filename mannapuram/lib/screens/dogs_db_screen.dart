@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mannapuram/model/dog.dart';
 import 'package:mannapuram/screens/add_dog_screen.dart';
+import 'package:mannapuram/widgets/nav_drawer_list_view.dart';
 
 import '../database/crud.dart';
 
@@ -30,31 +31,9 @@ class _DogsAppState extends State<DogsApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-        const DrawerHeader(
-        decoration: BoxDecoration(
-        color: Colors.blue,
-        ),
-        child: Text('Drawer Header'),
-      ),
-      ListTile(
-        title: const Text('Item 1'),
-        onTap: () {
-          // Update the state of the app.
-          // ...
-        },
-      ),
-      ListTile(
-        title: const Text('Item 2'),
-        onTap: () {
-          // Update the state of the app.
-          // ...
-        },
-      ),
-        ]),
+        child: NavDrawerListView(),
       ),
       appBar: AppBar(title: Text('dogs db demo'),),
       body: Column(
