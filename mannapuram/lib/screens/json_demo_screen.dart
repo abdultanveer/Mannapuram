@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mannapuram/dartexamples/test_json.dart';
+import 'package:http/http.dart' as http;
+
 
 import '../model/album.dart';
 
@@ -23,7 +25,7 @@ class _JsonAppState extends State<JsonApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    futureAlbum = fetchAlbum() as Future<Album>;
+    futureAlbum = fetchAlbum(http.Client()) as Future<Album>;
 
   }
 
