@@ -35,12 +35,13 @@ class DogDao {
     return database;
   }
 
-  Future<void> insertDog(Dog dog) async {
+  Future<int> insertDog(Dog dog) async {
     final db = await database;
     int position = await db.insert('dogs', dog.toMap(),
         nullColumnHack: null, conflictAlgorithm: ConflictAlgorithm.replace);
     print('inserted dog--' + dog.name);
     print("inserted at position =" + position.toString());
+    return position;
   }
 
   Future<List<Dog>> getDogs()async{
