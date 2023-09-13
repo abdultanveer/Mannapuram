@@ -4,6 +4,7 @@ import 'package:mannapuram/screens/add_dog_screen.dart';
 import 'package:mannapuram/widgets/nav_drawer_list_view.dart';
 
 import '../database/crud.dart';
+import '../widgets/bottom_nav.dart';
 
 var dogDao = new DogDao();
 var database;
@@ -31,7 +32,7 @@ class _DogsAppState extends State<DogsApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      bottomNavigationBar: MyBottomNavBar(),
       drawer: Drawer(
         child: NavDrawerListView(),
       ),
