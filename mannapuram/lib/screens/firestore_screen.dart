@@ -23,6 +23,16 @@ class AddUser extends StatelessWidget {
     // Create a CollectionReference called users that references the firestore collection
     CollectionReference users = FirebaseFirestore.instance.collection('users');
 
+    Future<void> readUsers() async{
+      var db = FirebaseFirestore.instance;
+
+      await  db.collection("users").get().then((event) {
+        for (var doc in event.docs) {
+          print("${doc.id} => ${doc.data()}");
+        }
+      });
+    }
+
     Future<void> addUser() {
       // Call the user's CollectionReference to add a new user
       return users
@@ -35,10 +45,17 @@ class AddUser extends StatelessWidget {
           .catchError((error) => print("Failed to add user: $error"));
     }
 
-    return ElevatedButton(
-      onPressed: addUser,
-      child: Text(
-        "Add User",
+    return Center(
+      child: Column(
+        children: [
+          ElevatedButton(onPressed: readUsers, child: Text('get users')),
+          ElevatedButton(
+            onPressed: addUser,
+            child: Text(
+              "Add User",
+            ),
+          ),
+        ],
       ),
     );
   }
